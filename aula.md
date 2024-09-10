@@ -49,3 +49,17 @@ Como um lego, você irá utilizar peças para criar algoritmos,ou seja, para res
  [x] Criar, passar argumento
  [x] Excutar
  [x] Arrow function / named function
+
+ # Estrutura de repetição
+ [x] while
+
+ # Condicionais
+ [x] switch
+ [x] if/else
+
+ ## Módulos em Node.js:
+ [x] Importação de módulos (require, CommonJS)
+ [x] Biblioteca 'inquirer' para criar prompts interativos
+
+ ## Programação assíncrona e Promises:
+ [x] Uso de funções assíncronas (async/await)
