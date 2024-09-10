@@ -3,11 +3,11 @@
 Maneira de dar instrução ao computador.
 Como um lego, você irá utilizar peças para criar algoritmos,ou seja, para resolver problemas.
 
-> **Algoritmo**: Sequência de passos lógicos e finito para a resolução de um problema.
+> 💡 **Algoritmo**: Sequência de passos lógicos e finito para a resolução de um problema.
 
 ## Peças de uma linguagem
 
--Comentários
+- Comentários
 - Declaração de variáveis (const,let)
 - Operadores (atribuição, concatenação, matemáticos, lógicos)
 - Tipos de dados (string, number, boolean)
@@ -19,3 +19,33 @@ Como um lego, você irá utilizar peças para criar algoritmos,ou seja, para res
 - Coletar dados
 - Processar os dados (manipular, alterar ...)
 - Apresentar dados
+
+## Escopo e variáveis
+ 
+ [x] Variáveis globais e locais
+ [x] Constantes
+
+ ## Tipos de dados:
+
+ [x] Strings (texto): ""``''
+ [x] Numbers: 1,2,3 
+ [x] Boolean: true, false
+
+ # Operadores
+ [x] Operadores de atribuição de valor: =
+ [x] Operador de contatenação: +
+
+ ## Estrutura de dados:
+
+ ### Arrays:
+ [x] Uma lista que contém qualquer tipo de dado
+
+ ### Objetos:
+ [x] Atributos e métodos
+ [x] Criação e manipulação de objetos
+ [x] Acesso a propriedades de objetos
+ 
+ ### Functions:
+ [x] Criar, passar argumento
+ [x] Excutar
+ [x] Arrow function / named function
