@@ -34,11 +34,13 @@ Como um lego, você irá utilizar peças para criar algoritmos,ou seja, para res
  # Operadores
  [x] Operadores de atribuição de valor: =
  [x] Operador de contatenação: +
+ [x] Operadores de comparação: == != <= >= < >
 
  ## Estrutura de dados:
 
  ### Arrays:
  [x] Uma lista que contém qualquer tipo de dado
+ [x] Métodos de array: push, find, forEach
 
  ### Objetos:
  [x] Atributos e métodos
@@ -53,7 +55,7 @@ Como um lego, você irá utilizar peças para criar algoritmos,ou seja, para res
  # Estrutura de repetição
  [x] while
 
- # Condicionais
+ # Condicionais / Controle de fluxo
  [x] switch
  [x] if/else
 
