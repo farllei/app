@@ -35,14 +35,15 @@ const listarMetas = async () => {
     instructions: false,
   });
 
+  metas.forEach((m) => {
+    m.checked = false;
+  });
+  
   if (respostas.length == 0) {
     console.log("Nenhum meta selecionada!");
     return;
   }
 
-  metas.forEach((m) => {
-    m.checked = false;
-  });
   // Searching for equal answers
   respostas.forEach((resposta) => {
     const meta = metas.find((m) => {
