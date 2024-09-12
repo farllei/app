@@ -3,7 +3,7 @@ const fs = require("fs").promises
 
 let mensagem = "Bem vindo ao App de Metas";
 
-let metas
+let metas;
 
 const carregarMetas = async () => {
     try {
@@ -14,6 +14,7 @@ const carregarMetas = async () => {
         metas = []
     }
 }
+
 
 const salvarMetas = async () => {
     await fs.writeFile("metas.json", JSON.stringify(metas, null, 2))
