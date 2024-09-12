@@ -2,15 +2,25 @@
 
 const { select, input, checkbox } = require("@inquirer/prompts");
 
-// Modelo de meta
-let meta = {
-  value: "Beber 3L de água por dia",
-  checked: false,
-};
+
 
 // Array de metas
+let metas
 
-let metas = [meta];
+const carregarMetas = async () => {
+  try {
+      const dados = await fs.readFile("metas.json", "utf-8")
+      metas = JSON.parse(dados)
+  }
+  catch (erro) {
+      metas = []
+  }
+}
+
+const salvarMetas = async () => {
+  await fs.writeFile("metas.json", JSON.stringify(metas, null, 2))
+}
+
 
 // função cadastrarNovaMeta
 const cadastrarNovaMeta = async () => {
@@ -23,10 +33,18 @@ const cadastrarNovaMeta = async () => {
   }
 
   metas.push({ value: meta, checked: false });
+  console.log("Meta cadastrada com sucesso!");
+  console.log("");
 };
 
 // função listar metas
 const listarMetas = async () => {
+  if (metas.length == 0) {
+    mensagem = "Não existem metas!";
+    console.log("");
+    return;
+  }
+
   // Values from array metas [...]
   const respostas = await checkbox({
     message:
@@ -40,7 +58,8 @@ const listarMetas = async () => {
   });
 
   if (respostas.length == 0) {
-    console.log("Nenhum meta selecionada!");
+    mensagem = "Nenhuma meta selecionada!";
+    console.log("");
     return;
   }
 
@@ -58,11 +77,19 @@ const listarMetas = async () => {
 // função metas realizadas
 
 const metasRealizadas = async () => {
+  if (metas.length == 0) {
+    mensagem = "Não existem matas!";
+    console.log("");
+    return;
+  }
+
   const realizadas = metas.filter((meta) => {
     return meta.checked;
   });
+
   if (realizadas.length == 0) {
-    console.log("Não existem metas realizadas! :(");
+    mensagem = "Não existem metas realizadas! :(";
+    console.log("");
     return;
   }
 
@@ -72,14 +99,20 @@ const metasRealizadas = async () => {
   });
 };
 
-// funcao metas abertas
+// função metas abertas
 const metasAbertas = async () => {
+  if (metas.length == 0) {
+    mensagem = "Não existem metas!";
+    console.log("");
+    return;
+  }
   const abertas = metas.filter((meta) => {
     return !meta.checked;
   });
 
   if (abertas.length == 0) {
-    console.log("Não existem metas abertas! :(");
+    mensagem = "Não existem metas abertas! :(";
+    console.log("");
     return;
   }
 
@@ -89,15 +122,54 @@ const metasAbertas = async () => {
   });
 };
 
+// função deletar meta(s)
+
+const deletarMetas = async () => {
+  if (metas.length == 0) {
+    mensagem = "Não existem metas!";
+    console.log("");
+    return;
+  }
+
+  const metasDesmarcadas = metas.map((meta) => {
+    return { value: meta.value, checked: false };
+  });
+
+  const itensADeletar = await checkbox({
+    message: "selecione meta(s) para deletar",
+    choices: [...metasDesmarcadas],
+    instructions: false,
+  });
+
+  if (itensADeletar.length == 0) {
+    console.log("Nenhuma meta para deletar!");
+    console.log("");
+    return;
+  }
+
+  itensADeletar.forEach((item) => {
+    metas.filter((meta) => {
+      return meta.value != item;
+    });
+  });
+
+  console.log("Meta(s) deletada(s) com sucesso!");
+};
+
+
+//__________________________________________________________________
+
 // Menu de início
 
 const start = async () => {
+  
   while (true) {
+
     const opcao = await select({
       message: "Menu >",
       choices: [
         {
-          name: "Cadastrar meta",
+          name: "Cadastrar nova meta",
           value: "cadastrar",
         },
         {
@@ -111,6 +183,10 @@ const start = async () => {
         {
           name: "Metas abertas",
           value: "abertas",
+        },
+        {
+          name: "Deletar meta(s)",
+          value: "deletar",
         },
         {
           name: "Sair",
@@ -134,6 +210,9 @@ const start = async () => {
         break;
       case "abertas":
         await metasAbertas();
+        break;
+      case "deletar":
+        await deletarMetas();
         break;
       case "sair":
         console.log("Até a próxima!");
